@@ -1,0 +1,21 @@
+<?php
+/**
+* Copyright 2018 Opoink Framework (http://opoink.com/)
+* Licensed under MIT, see LICENSE.md
+*/
+?>
+<script src='https://www.google.com/recaptcha/api.js'></script>
+<script>
+	$('[data-toggle="tooltip"]').tooltip();
+	$(".preloader").fadeOut();
+ 
+	$('#to-recover').on("click", function() {
+		$("#loginform").slideUp();
+		$("#recoverform").fadeIn();
+	});
+	$('#to-login').click(function(){
+		
+		$("#recoverform").hide();
+		$("#loginform").fadeIn();
+	});
+</script>

@@ -1,0 +1,74 @@
+/* test */
+body {
+	min-width: 320px;
+}
+.hidden {
+	display: none;
+}
+
+.form-control-important {
+	color: #f40039;
+}
+
+.install-box {
+	max-width: 768px;
+	padding: 15px;
+	box-sizing: border-box;
+	margin: 100px 0px;
+}
+
+.progress {
+	background-color: #e5e5e5;
+}
+
+.preloader {
+	background: rgba(255,255,255,0.8);
+}
+
+.general_notification_container {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	max-width: 500px;
+	min-width: 320px;
+	z-index: 99;
+}
+.general_notification_container .general_notification {
+	padding: 0px 15px;
+	list-style: none;
+}
+.general_notification_container .general_notification_message {
+	position: relative;
+	padding: 15px 55px 15px 15px;
+}
+.general_notification_container .notificationMessageClose {
+	position: absolute;
+	right: 0;
+	top: 0px;
+	border: 0;
+	height: 100%;
+	width: 45px;
+	font-size: 18px;
+	color: inherit;
+	background: transparent;
+}
+.left-sidebar {
+	transition: width 200ms;
+}
+
+.f-w-300 {font-weight: 300;}
+.f-w-400 {font-weight: 400;}
+.f-w-500 {font-weight: 500;}
+.f-w-600 {font-weight: 600;}
+.f-w-700 {font-weight: 700;}
+.f-w-800 {font-weight: 800;}
+.f-w-900 {font-weight: 900;}
+
+.c-pointer {
+	cursor: pointer;
+}
+
+.required-star {
+	color: rgb(218, 84, 46);
+}

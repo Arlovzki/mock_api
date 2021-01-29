@@ -1,0 +1,97 @@
+<?php
+/**
+* Copyright 2018 Opoink Framework (http://opoink.com/)
+* Licensed under MIT, see LICENSE.md
+*/
+?>
+<?php require_once(__DIR__ . '/container_top.phtml') ?>
+	<div class="row">
+		<div class="col-md-12">
+			<form id="user_account_form" action="<?= $this->getUrl('/system/user/save') ?>" method="POST">
+				<div class="card">
+					<div class="card-body col-6">
+						<h5 class="card-title m-b-0">Account Info</h5>
+						<div class="form-group m-t-20">
+		                    <label>First name <span class="required-star">*</span></label>
+		                    <input 
+		                    	id="first-name" 
+		                    	class="form-control date-inputmask" 
+		                    	name="firstname" 
+		                    	required="required"
+		                    	maxlength="255"
+		                    	value="<?= $this->user->getData('firstname') ?>"
+		                    	type="text">
+		                </div>
+						<div class="form-group">
+		                    <label>Last name <span class="required-star">*</span></label>
+		                    <input 
+		                    	id="last-name" 
+		                    	class="form-control date-inputmask" 
+		                    	name="lastname" 
+		                    	required="required"
+		                    	maxlength="255"
+		                    	value="<?= $this->user->getData('lastname') ?>"
+		                    	type="text">
+		                </div>
+						<div class="form-group">
+		                    <label>Email <span class="required-star">*</span></label>
+		                    <input 
+		                    	id="email" 
+		                    	class="form-control date-inputmask" 
+		                    	name="email" 
+		                    	required="required"
+		                    	maxlength="255"
+		                    	value="<?= $this->user->getData('email') ?>"
+		                    	type="email">
+		                </div>
+
+
+						<h5 class="card-title m-b-0 m-t-40">Password</h5>
+						<div class="form-group m-t-20">
+		                    <label>Current Password</label>
+		                    <input 
+		                    	id="current-password" 
+		                    	class="form-control date-inputmask" 
+		                    	name="current_password"
+		                    	maxlength="255"
+		                    	value=""
+		                    	type="password">
+		                </div>
+						<div class="form-group">
+		                    <label>New Password</label>
+		                    <input 
+		                    	id="new-password" 
+		                    	class="form-control date-inputmask" 
+		                    	name="new_password" 
+		                    	maxlength="255"
+		                    	value=""
+		                    	type="password">
+		                </div>
+						<div class="form-group">
+		                    <label>Re-type new password</label>
+		                    <input 
+		                    	id="retype-new-password" 
+		                    	class="form-control date-inputmask" 
+		                    	name="retype_new_password"
+		                    	maxlength="255"
+		                    	value=""
+		                    	type="password">
+		                </div>
+
+		                <input type="hidden" class="form_key" name="form_key" value="">
+
+						<button 
+							type="button" 
+							class="btn btn-primary modalDialodConfirm"
+							data-title="Save info" 
+							data-message="Are you sure you want to save new info?"
+							data-closecaption="No"
+							data-confirm="Save Now"
+							data-callbackbunction="opoink.user.beforeSave()"
+						>Save info</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+<?php require_once(__DIR__ . '/container_bottom.phtml') ?>

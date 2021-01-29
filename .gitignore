@@ -1,0 +1,9 @@
+/App/Ext/*/
+/App/Theme/*/
+/Var/*/
+/etc/*
+!/etc/.htaccess
+/public/*
+/public/deploy*
+/public/generation.php
+!/public/sys

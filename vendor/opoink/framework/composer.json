@@ -1,0 +1,19 @@
+{
+    "name": "opoink/framework",
+    "description": "Opoink is a modern PHP framework that let developers create a very dynamic and modular application that may require less code.",
+    "keywords": ["opoink", "framework", "modular framework", "modular"],
+    "homepage": "https://github.com/opoink/framework",
+    "license": "MIT",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+           "Of\\": ""
+        }
+    },
+    "require": {
+        "php": ">=7.1.0",
+        "zendframework/zendframework": "3.0.0",
+        "php-di/php-di": "^5.4",
+        "matthiasmullie/minify": "^1.3"
+    }
+}

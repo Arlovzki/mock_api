@@ -1,0 +1,164 @@
+<?php
+/**
+* Copyright 2018 Opoink Framework (http://opoink.com/)
+* Licensed under MIT, see LICENSE.md
+*/
+?>
+<div class="auth-wrapper d-flex no-block justify-content-center align-items-center bg-dark">
+	<div class="install-box auth-box bg-light border-secondary">
+		<div class="progress">
+			<div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 1%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+		</div>
+		
+		<div class="install-box-1 m-t-30">
+			<div class="m-t-15">
+				<img src="<?= $this->_url->getUrl('/public/sys/assets/images/logo_and_text.png') ?>">
+			</div>
+			<div class="m-t-15">
+				<p class="m-b-30">
+					Welcome to Opoink Framework installation
+				</p>
+				<p class="m-b-30">
+					By clicking continue button you agree to our <a href="https://opoink.com/termsandconditions" target="_blank">terms and condition</a>
+				</p>
+				<hr />
+				<div class="text-right">
+					<button type="button" class="btn btn-primary btn-lg installNextStep" data-stepno="1">Aggree and continue</button>
+				</div>
+			</div>
+		</div>
+		
+		<div class="install-box-2 hidden m-t-30">
+			<h4 class="card-title m-b-0">Server Requirement:</h4>
+			<hr />
+			<p id="phpVersion" class="serverRequirement"><i class="fas fa-spinner m-r-15"></i> <span class="caption">Php Version</span></p>
+			<p id="memoryLimit" class="serverRequirement"><i class="fas fa-spinner m-r-15"></i> <span class="caption">Memory limit</span></p>
+			<hr />
+			<div class="text-right">
+				<button type="button" class="btn btn-primary btn-lg checkRequirements" data-stepno="2">Check now</button>
+			</div>
+		</div>
+		
+		<div class="install-box-3 hidden m-t-30">
+			<?php
+				$db = $this->getDbInfo();
+			?>
+			<h4 class="card-title m-b-0">Database:</h4>
+			<hr />
+			<form id="database_form_field" action="" method="POST">
+				<div class="form-group">
+					<label>Host <span class="form-control-important">*</span>:</label>
+					<input class="form-control date-inputmask" type="text" name="host" value="<?= $db ? $db['host'] : 'localhost' ?>" required="required" />
+				</div>
+				<div class="form-group">
+					<label>User <span class="form-control-important">*</span>:</label>
+					<input class="form-control date-inputmask" type="text" name="user" value="<?= $db ? $db['username'] : '' ?>" required="required" />
+				</div>
+				<div class="form-group">
+					<label>Password:</label>
+					<input class="form-control date-inputmask" type="password" name="password" value="<?= $db ? $db['password'] : '' ?>" />
+				</div>
+				<div class="form-group">
+					<label>Database name <span class="form-control-important">*</span>:</label>
+					<input class="form-control date-inputmask" type="text" name="name" value="<?= $db ? $db['database'] : '' ?>" required="required" />
+				</div>
+				<div class="form-group">
+					<label>Prefix:</label>
+					<input class="form-control date-inputmask" type="text" name="prefix" value="<?= $db ? $db['table_prefix'] : '' ?>" maxlength="5" />
+				</div>
+				<div class="databaseSaveErrorMessage">
+				</div>
+			</form>
+			<hr />
+			<div class="text-right">
+				<button type="button" class="btn btn-primary btn-lg installNextStep hidden" data-stepno="3">Next</button>
+				<button type="button" class="btn btn-primary btn-lg saveDatabaseInfo">Save Database</button>
+			</div>
+		</div>
+		
+		<div class="install-box-4 hidden m-t-30">
+			<?php $sa = $this->getSystemAdminAccount(); ?>
+			<h4 class="card-title m-b-0">System Account:</h4>
+			<hr />
+			<form id="system_admin_account" action="" method="POST">
+				<input class="" type="hidden" name="id" value="<?= $sa ? $sa->getData('id') : '' ?>" required="required" />
+				<div id="saa_firstname" class="form-group">
+					<label>First Name <span class="form-control-important">*</span>:</label>
+					<input class="form-control date-inputmask" type="text" name="firstname" value="<?= $sa ? $sa->getData('firstname') : '' ?>" required="required" />
+					<div class="invalid-feedback">Firstname is required</div>
+				</div>
+				<div id="saa_lastname" class="form-group">
+					<label>Last Name <span class="form-control-important">*</span>:</label>
+					<input class="form-control date-inputmask" type="text" name="lastname" value="<?= $sa ? $sa->getData('lastname') : '' ?>" required="required" />
+					<div class="invalid-feedback">Lastname is required</div>
+				</div>
+				<div id="saa_email" class="form-group">
+					<label>Email <span class="form-control-important">*</span>:</label>
+					<input class="form-control date-inputmask" type="email" name="email" value="<?= $sa ? $sa->getData('email') : '' ?>" required="required" />
+					<div class="invalid-feedback">Email is required</div>
+				</div>
+				<div id="saa_password" class="form-group">
+					<label>Password <span class="form-control-important">*</span>:</label>
+					<input class="form-control date-inputmask" type="password" name="password" value="" required="required" />
+					<div class="invalid-feedback">Password is required</div>
+				</div>
+				<div id="saa_retype_password" class="form-group">
+					<label>Retype Password <span class="form-control-important">*</span>:</label>
+					<input class="form-control date-inputmask" type="password" name="retypepassword" value="" required="required" />
+					<div class="invalid-feedback">Retype password is required</div>
+				</div>
+			</form>
+			<hr />
+			<div class="text-right">
+				<button type="button" class="btn btn-primary btn-lg installNextStep hidden" data-stepno="4">Next</button>
+				<button type="button" class="btn btn-primary btn-lg saveAdminAccount">Save Account</button>
+			</div>
+		</div>
+		
+		<div class="install-box-5 m-t-30 hidden">
+			<h4 class="card-title m-b-0">System and Admin Panel:</h4>
+			<hr />
+			<form id="admin_panel_info" action="" method="POST">
+				<div class="form-group">
+					<label>Admin URL: <?= $this->_url->getUrl('/admin') ?></label>
+					<input class="form-control date-inputmask" type="text" name="admin_url" value="_<?= strtolower(\Of\Std\Password::generate(4)) ?>" maxlength="10" />
+				</div>
+
+				<div class="form-group">
+					<label>System URL: <?= $this->_url->getUrl('/system') ?></label>
+					<input class="form-control date-inputmask" type="text" name="system_url" value="_<?= strtolower(\Of\Std\Password::generate(4)) ?>" maxlength="10" />
+				</div>
+
+
+				<h4 class="card-title m-b-0">Auth:</h4>
+				<hr />
+				<div class="form-group">
+					<label>Auth Key</label>
+					<input class="form-control date-inputmask" type="text" name="auth_key" value="<?= strtolower(\Of\Std\Password::generate(200)) ?>" maxlength="200" />
+				</div>
+				<div class="form-group">
+					<label>Auth Secret</label>
+					<input class="form-control date-inputmask" type="text" name="auth_secret" value="<?= strtolower(\Of\Std\Password::generate(200)) ?>" maxlength="200" />
+				</div>
+			</form>
+			<hr />
+			<div class="text-right">
+				<button type="button" class="btn btn-primary btn-lg installNextStep hidden" data-stepno="5">Finish</button>
+				<button type="button" class="btn btn-primary btn-lg saveAdminUrl">Save System and Admin</button>
+			</div>
+		</div>
+		
+		<div class="install-box-6 m-t-30 hidden">
+			<h4 class="card-title m-b-0">Admin Panel:</h4>
+			<hr />
+			<p class="sUrl">System Url: <a href="<?= $this->_url->getUrl('/system') ?>"><?= $this->_url->getUrl('/system') ?></a></p>
+			<p class="aUrl">Admin Url: <a href=""></a></p>
+			<p class="fUrl">Front Url: <a href="<?= $this->_url->getUrl() ?>"><?= $this->_url->getUrl() ?></a></p>
+			<hr />
+			<p class="sau">System Admin Username: </p>
+			<p class="sap">System Admin Password: </p>
+			<hr />
+			<p>Dont forget to save this info.</p>
+		</div>
+	</div>
+</div>

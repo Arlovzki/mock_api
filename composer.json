@@ -1,0 +1,16 @@
+{
+	"name": "opoink/base",
+	"description": "Opoink is a modern PHP framework that let developers create a very dynamic and modular application that may require less code.",
+    "keywords": ["opoink", "framework", "modular framework", "modular"],
+    "homepage": "https://github.com/opoink/base",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+			"": "App/Ext/"
+        }
+    },
+    "require": {
+        "php": ">=7.1.0",
+		"opoink/framework": "1.0.5"
+    }
+}

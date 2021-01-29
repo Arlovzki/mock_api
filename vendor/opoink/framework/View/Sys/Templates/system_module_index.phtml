@@ -1,0 +1,173 @@
+<?php
+/**
+* Copyright 2018 Opoink Framework (http://opoink.com/)
+* Licensed under MIT, see LICENSE.md
+*/
+?>
+<?php require_once(__DIR__ . '/container_top.phtml') ?>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="card">
+				<div class="card-body">
+					<h5 class="card-title m-b-0">Installed Modules</h5>
+				</div>
+				<div class="table-responsive">
+					<form id="installedModules" action="<?= $this->getUrl('/system/module/action'); ?>" method="POST">
+						<table class="table">
+							<thead class="thead-light">
+								<tr>
+									<th>
+										<label class="customcheckbox m-b-20">
+											<input class="multiCheboxSelect" type="checkbox" data-list="installedModulesCheckbox">
+											<span class="checkmark"></span>
+										</label>
+									</th>
+									<th scope="col">Name</th>
+									<th scope="col">Installed Version</th>
+									<th scope="col">Config Version</th>
+									<th scope="col">Routes</th>
+									<th scope="col">Controllers</th>
+								</tr>
+							</thead>
+							<tbody class="customtable">
+								<?php foreach($this->modules['installed'] as $modKey => $module): ?>
+									<tr>
+										<td>
+											<label class="customcheckbox">
+												<input 
+													class="installedModulesCheckbox" 
+													type="checkbox" 
+													name="intalledModule[]"
+													value="<?= $modKey  ?>"
+												/>
+												<span class="checkmark"></span>
+											</label>
+										</td>
+										<td><?= $modKey  ?></td>
+										<td><?= $module['installed_version']  ?></td>
+										<td><?= $module['version'] ?></td>
+
+										<td>
+											<?php foreach($module['controllers'] as $conKey => $conVal): ?>
+												<p class="m-b-0"><?= strtolower($conKey) ?></p>
+											<?php endforeach ?>
+										</td>
+										<td>
+											<?php foreach($module['controllers'] as $conKey => $conVal): ?>
+												<p class="m-b-0"><?= '\\' . ltrim($conVal, '\\') ?></p>
+											<?php endforeach ?>
+										</td>
+									</tr>
+								<?php endforeach ?>
+							</tbody>
+							<tfoot>
+								<tr>
+									<td colspan="6">
+										<p>With selected installed module:</p>
+										<button 
+											type="button" 
+											class="btn btn-primary modalDialodConfirm"
+											data-title="Uninstall Modules" 
+											data-message="Are you sure you want to upgrade all selected modules? This will upgrade all database includes on schema/upgrade"
+											data-closecaption="No"
+											data-confirm="Upgrade now"
+											data-callbackbunction="opoink.module.beforeFormSubmit('installedModulesCheckbox',['installedModules','upgrade'])"
+											name="upgrade"
+											value="1"
+										>Upgrade</button>
+										<button 
+											type="button" 
+											class="btn btn-outline-primary modalDialodConfirm"
+											data-title="Uninstall Modules" 
+											data-message="Are you sure you want to uninstall all selected modules?"
+											data-closecaption="No"
+											data-confirm="Uninstall now"
+											data-callbackbunction="opoink.module.beforeFormSubmit('installedModulesCheckbox',['installedModules','uninstall'])"
+											name="uninstall"
+											value="1"
+										>Uninstall</button>
+									</td>
+								</tr>
+							</tfoot>
+						</table>
+						<input class="action" type="hidden" name="action" value="">
+						<input class="form_key" type="hidden" name="form_key" value="">
+					</form>
+				</div>
+			</div>
+
+
+			<div class="card">
+				<div class="card-body">
+					<h5 class="card-title m-b-0">Available Modules</h5>
+				</div>
+				<div class="table-responsive">
+					<form id="availableModules" action="<?= $this->getUrl('/system/module/install'); ?>" method="POST">
+						<table class="table">
+							<thead class="thead-light">
+								<tr>
+									<th>
+										<label class="customcheckbox m-b-20">
+											<input class="multiCheboxSelect" type="checkbox" data-list="availableModulesCheckbox">
+											<span class="checkmark"></span>
+										</label>
+									</th>
+									<th scope="col">Name</th>
+									<th scope="col">Version</th>
+									<th scope="col">Routes</th>
+									<th scope="col">Controllers</th>
+								</tr>
+							</thead>
+							<tbody class="customtable">
+								<?php foreach($this->modules['uninstalled'] as $modKey => $module): ?>
+									<tr>
+										<td>
+											<label class="customcheckbox">
+												<input 
+													class="availableModulesCheckbox" 
+													type="checkbox" 
+													name="availableModule[]"
+													value="<?= $modKey  ?>"
+												/>
+												<span class="checkmark"></span>
+											</label>
+										</td>
+										<td><?= $modKey  ?></td>
+										<td><?= $module['version'] ?></td>
+										<td>
+											<?php foreach($module['controllers'] as $conKey => $conVal): ?>
+												<p class="m-b-0"><?= strtolower($conKey) ?></p>
+											<?php endforeach ?>
+										</td>
+										<td>
+											<?php foreach($module['controllers'] as $conKey => $conVal): ?>
+												<p class="m-b-0"><?= '\\' . ltrim($conVal, '\\') ?></p>
+											<?php endforeach ?>
+										</td>
+									</tr>
+								<?php endforeach ?>
+							</tbody>
+							<tfoot>
+								<tr>
+									<td colspan="5">
+										<p>With selected available module:</p>
+										<button 
+											type="button" 
+											class="btn btn-primary modalDialodConfirm"
+											data-title="Install Modules" 
+											data-message="Are you sure you want to install all selected modules?"
+											data-closecaption="No"
+											data-confirm="Install Now"
+											data-callbackbunction="opoink.module.beforeFormSubmit('availableModulesCheckbox', 'availableModules')"
+										>Install</button>
+									</td>
+								</tr>
+							</tfoot>
+						</table>
+						<input class="form_key" type="hidden" name="form_key" value="">
+					</form>
+				</div>
+			</div>			
+		</div>
+	</div>
+<?php require_once(__DIR__ . '/container_bottom.phtml') ?>

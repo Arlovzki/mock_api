@@ -1,0 +1,173 @@
+<?php
+/**
+* Copyright 2018 Opoink Framework (http://opoink.com/)
+* Licensed under MIT, see LICENSE.md
+*/
+?>
+<?php require_once(__DIR__ . '/container_top.phtml') ?>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="card">
+				<div class="">
+					<div class="row">
+						<div class="col-lg-3 border-right p-r-0">
+							<div class="card-body border-bottom c-pointer" data-toggle="collapse" data-target="#sys_general_settings" aria-expanded="true" aria-controls="sys_general_settings">
+								General Setting
+							</div>
+							<div class="card-body border-bottom c-pointer" data-toggle="collapse" data-target="#sys_cache" aria-expanded="false" aria-controls="sys_cache">
+								Cache
+							</div>
+							<div class="card-body c-pointer" data-toggle="collapse" data-target="#sys_file_stream" aria-expanded="false" aria-controls="sys_file_stream">
+								File Stream Settings
+							</div>
+						</div>
+						<div id="accordion" class="col-lg-9">
+							<form id="sys_settings_form_field" action="" method="POST">
+								<div id="sys_general_settings" class="collapse show" data-parent="#accordion">
+									<div class="card-body">
+										<h5 class="card-title m-b-0">General Setting</h5>
+										<hr>
+										<div class="form-group m-t-20 col-md-6">
+											<?php 
+												$domains = '';
+												if(count($this->getConfig('domains')) > 0){
+													$domains = implode(',', $this->getConfig('domains'));
+												} 
+											?>
+											<label for="sys_accepted_domain_url">
+												Accepted Domains
+												<small class="text-muted">
+													Separated by commas, leave it blank to accept all
+												</small>
+											</label>
+											<input class="form-control" id="sys_admin_url" name="domains" type="text" value="<?= $domains ?>">
+										</div>
+										<div class="form-group m-t-20 col-md-6">
+											<label for="sys_admin_url">
+												Admin url 
+												<small class="text-muted">
+													<?= $this->getUrl('/admin'.$this->getConfig('admin')) ?>
+												</small>
+											</label>
+											<input class="form-control" id="sys_admin_url" name="admin" type="text" value="<?= $this->getConfig('admin'); ?>">
+										</div>
+										<div class="form-group m-t-20 col-md-6">
+											<label for="sys_system_url">
+												System url 
+												<small class="text-muted">
+													<?= $this->getUrl('/system') ?>
+												</small>
+											</label>
+											<input class="form-control" id="sys_system_url" name="system_url" type="text" value="<?= $this->getConfig('system_url'); ?>">
+										</div>
+										<div class="form-group m-t-20 col-md-6">
+											<label for="sys_mode">
+												Mode
+											</label>
+											<select id="sys_mode" class="select2 form-control custom-select" name="mode" style="width: 100%; height:36px;">
+												<option value="production"<?= ($this->getConfig('mode') === 'production') ? ' selected="selected"' : '' ?>>Production</option>
+												<option value="developer"<?= ($this->getConfig('mode') === 'developer') ? ' selected="selected"' : '' ?>>Developer</option>
+											</select>
+										</div>
+										
+										
+										<h5 class="card-title m-b-0 m-t-30">Google re-Captcha</h5>
+										<hr>
+										<?php
+											$sys_g_recaptcha = $this->getConfig('sys_g_recaptcha');
+										?>
+										<div class="form-group m-t-20 col-md-6">
+											<label for="sys_g_recaptcha">
+												Enable
+											</label>
+											<select id="sys_g_recaptcha" class="select2 form-control custom-select" name="sys_g_recaptcha" style="width: 100%; height:36px;">
+												<option value="0"<?= (isset($sys_g_recaptcha['status']) && $sys_g_recaptcha['status'] === 0) ? ' selected="selected"' : '' ?>>No</option>
+												<option value="1"<?= (isset($sys_g_recaptcha['status']) && $sys_g_recaptcha['status'] === 1) ? ' selected="selected"' : '' ?>>Yes</option>
+											</select>
+										</div>
+										<div class="form-group m-t-20 col-md-6">
+											<label for="g_recaptcha_key">
+												Key
+											</label>
+											<input 
+												class="form-control" 
+												id="g_recaptcha_key" 
+												name="g_recaptcha_key" 
+												type="text" 
+												value="<?= isset($sys_g_recaptcha['key']) ? $sys_g_recaptcha['key'] : '' ?>"
+											>
+										</div>
+										<div class="form-group m-t-20 col-md-6">
+											<label for="g_recaptcha_secret">
+												Secret
+											</label>
+											<input 
+												class="form-control" 
+												id="g_recaptcha_secret" 
+												name="g_recaptcha_secret" 
+												type="text" value="<?= isset($sys_g_recaptcha['secret']) ? $sys_g_recaptcha['secret'] : '' ?>"
+											>
+										</div>
+									</div>
+								</div>
+							
+								<div id="sys_cache" class="collapse" data-parent="#accordion">
+									<div class="card-body">
+										<h5 class="card-title m-b-0">Cache Settings</h5>
+										<hr>
+										<div class="form-group m-t-20 col-md-6">
+											<label for="sys_cache_lifetime">
+												Cache max life time
+												<small class="text-muted">
+													can be overide via xml attribute
+												</small>
+											</label>
+											<?php
+												$cache = $this->getConfig('cache');
+											?>
+											<input 
+												class="form-control" 
+												id="sys_admin_url" 
+												name="cache[max-age]" 
+												type="text" 
+												value="<?= isset($cache['max-age']) ? $cache['max-age'] : 86400 ?>">
+										</div>
+									</div>
+								</div>
+							
+								<div id="sys_file_stream" class="collapse" data-parent="#accordion">
+									<div class="card-body">
+										<h5 class="card-title m-b-0">File Stream Settings</h5>
+										<hr>
+										<div class="form-group m-t-20 col-md-12">
+											<p class="m-b-0">This will be the accepted file type, the controller can stream</p>
+											<p class="m-b-0">Example: <?= $this->getUrl('/images/your-image-name.') ?><span class="f-w-600">png</span></p>
+										</div>
+										<div class="form-group m-t-20 col-md-6">
+											<label for="sys_cache_lifetime">
+												Images
+												<small class="text-muted">
+													Comma separated
+												</small>
+											</label>
+											<?php $images = $this->getConfig('images') ?>
+											<textarea class="form-control" name="images"><?= is_array($images) ? implode(',', $images) : '' ?></textarea>
+										</div>
+									</div>
+								</div>
+								<div>
+									<div class="card-body">
+										<hr>
+										<div class="form-group m-0 col-md-12">
+											<button type="button" class="save btn btn-primary" name="saveSetting">Save Changes</button>
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<?php require_once(__DIR__ . '/container_bottom.phtml') ?>

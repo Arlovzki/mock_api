@@ -1,0 +1,173 @@
+<?php
+/**
+* Copyright 2018 Opoink Framework (http://opoink.com/)
+* Licensed under MIT, see LICENSE.md
+*/
+?>
+<?php require_once(__DIR__ . '/container_top.phtml') ?>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="card">
+				<div class="card-body">
+					<h5 class="card-title m-b-0">Services</h5>
+					<p class="m-t-20">
+						Cache system is always ignored on developers mode. 
+						e.i is less compiler, it is only compiled and streamed, 
+						this may take a light to heavy server load consumpsion,
+						depending on how many less files do you have in your modules, 
+						but we found this very helpful during the development mode.
+					</p>
+				</div>
+
+
+				<div class="table-responsive">
+					<form id="cached_services" action="<?= $this->getUrl('/system/cache/action'); ?>" method="POST">
+						<table class="table">
+							<thead class="thead-light">
+								<tr>
+									<th style="width: 10px;">
+										<label class="customcheckbox m-b-20">
+											<input class="multiCheboxSelect" type="checkbox" data-list="cache_services_checkbox">
+											<span class="checkmark"></span>
+										</label>
+									</th>
+									<th scope="col" style="width: 250px;">Name</th>
+									<th scope="col">Description</th>
+									<th scope="col">Status</th>
+								</tr>
+							</thead>
+							<tbody class="customtable">
+								<tr>
+									<td>
+										<label class="customcheckbox">
+											<input 
+												class="cache_services_checkbox" 
+												type="checkbox" 
+												name="cache_services[less]"
+												value="less"
+											/>
+											<span class="checkmark"></span>
+										</label>
+									</td>
+									<td>LESS</td>
+									<td>Clear all cached less file in /Var/Less directory</td>
+									<td>
+										<?php 
+											$xmlStatus = $this->cacheManager->getStatus('less');
+											$htmlClass = 'danger';
+											$htmlStatus = ucfirst($xmlStatus);
+											if(strtolower($xmlStatus) === \Of\CacheManager\CacheManager::UPDATED){
+												$htmlClass = 'success';
+											}
+										?>
+										<span class="badge badge-pill badge-<?= $htmlClass ?>"><?= $htmlStatus ?></span>
+									</td>
+								</tr>
+
+								<tr>
+									<td>
+										<label class="customcheckbox">
+											<input 
+												class="cache_services_checkbox" 
+												type="checkbox" 
+												name="cache_services[deployed_files]"
+												value="deployed_files"
+											/>
+											<span class="checkmark"></span>
+										</label>
+									</td>
+									<td>Deployed Files</td>
+									<td>This are the files inside /public/deploy{deployment_time} this will also remove the directory itself</td>
+									<td>
+										<?php 
+											$xmlStatus = $this->cacheManager->getStatus('deployed_files');
+											$htmlClass = 'danger';
+											$htmlStatus = ucfirst($xmlStatus);
+											if(strtolower($xmlStatus) === \Of\CacheManager\CacheManager::UPDATED){
+												$htmlClass = 'success';
+											}
+										?>
+										<span class="badge badge-pill badge-<?= $htmlClass ?>"><?= $htmlStatus ?></span>
+									</td>
+								</tr>
+
+								<tr>
+									<td>
+										<label class="customcheckbox">
+											<input 
+												class="cache_services_checkbox" 
+												type="checkbox" 
+												name="cache_services[xml]"
+												value="xml"
+											/>
+											<span class="checkmark"></span>
+										</label>
+									</td>
+									<td>XML</td>
+									<td>This is the compiled XML/HTML file from your XML layout, will clear all directories and files in /Var/Layout</td>
+									<td>
+										<?php 
+											$xmlStatus = $this->cacheManager->getStatus('xml');
+											$htmlClass = 'danger';
+											$htmlStatus = ucfirst($xmlStatus);
+											if(strtolower($xmlStatus) === \Of\CacheManager\CacheManager::UPDATED){
+												$htmlClass = 'success';
+											}
+										?>
+										<span class="badge badge-pill badge-<?= $htmlClass ?>"><?= $htmlStatus ?></span>
+									</td>
+								</tr>
+
+								<tr>
+									<td>
+										<label class="customcheckbox">
+											<input 
+												class="cache_services_checkbox" 
+												type="checkbox" 
+												name="cache_services[database]"
+												value="database"
+											/>
+											<span class="checkmark"></span>
+										</label>
+									</td>
+									<td>Database</td>
+									<td>The cached data from database, will clear all directories and files in /Var/db</td>
+									<td>
+										<?php 
+											$xmlStatus = $this->cacheManager->getStatus('database');
+											$htmlClass = 'danger';
+											$htmlStatus = ucfirst($xmlStatus);
+											if(strtolower($xmlStatus) === \Of\CacheManager\CacheManager::UPDATED){
+												$htmlClass = 'success';
+											}
+										?>
+										<span class="badge badge-pill badge-<?= $htmlClass ?>"><?= $htmlStatus ?></span>
+									</td>
+								</tr>
+							</tbody>
+							<tfoot>
+								<tr>
+									<td colspan="6">
+										<p>With selected services:</p>
+										<button 
+											type="button" 
+											class="btn btn-primary modalDialodConfirm"
+											data-title="Purge cache services" 
+											data-message="Are you sure you want to purge cache for selected services?"
+											data-closecaption="No"
+											data-confirm="Purge now"
+											data-callbackbunction="opoink.cache.beforeFormSubmit('cache_services_checkbox', 'cached_services')"
+											name="purge"
+											value="1"
+										>Purge</button>
+									</td>
+								</tr>
+							</tfoot>
+						</table>
+						<input class="form_key" type="hidden" name="form_key" value="">
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+<?php require_once(__DIR__ . '/container_bottom.phtml') ?>

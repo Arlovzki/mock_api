@@ -1,0 +1,64 @@
+<?php
+/**
+* Copyright 2018 Opoink Framework (http://opoink.com/)
+* Licensed under MIT, see LICENSE.md
+*/
+?>
+<aside class="left-sidebar" data-sidebarbg="skin5">
+	<!-- Sidebar scroll-->
+	<div class="scroll-sidebar">
+		<!-- Sidebar navigation-->
+		<nav class="sidebar-nav">
+			<ul id="sidebarnav" class="p-t-30">
+				<li class="sidebar-item">
+					<a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?= $this->getUrl('/system') ?>" aria-expanded="false">
+						<i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span>
+					</a>
+				</li>
+				
+				<li class="sidebar-item">
+					<a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
+						<i class="mdi mdi-chart-bubble"></i><span class="hide-menu">System</span>
+					</a>
+                    <ul aria-expanded="false" class="collapse first-level">
+                        <li class="sidebar-item">
+                        	<a href="<?= $this->getUrl('/system/settings') ?>" class="sidebar-link">
+                        		<i class="mdi mdi-settings"></i><span class="hide-menu">Config</span>
+                        	</a>
+                        </li>
+                        <li class="sidebar-item">
+                        	<a href="<?= $this->getUrl('/system/cache') ?>" class="sidebar-link">
+                        		<i class="mdi mdi-settings"></i><span class="hide-menu">Cache</span>
+                        	</a>
+                        </li>
+                    </ul>
+                </li>
+				
+				<li class="sidebar-item">
+					<a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
+						<i class="mdi mdi-chart-bubble"></i><span class="hide-menu">Module</span>
+					</a>
+                    <ul aria-expanded="false" class="collapse first-level">
+                        <li class="sidebar-item">
+                        	<a href="<?= $this->getUrl('/system/module') ?>" class="sidebar-link">
+                        		<i class="mdi mdi-chart-bubble"></i><span class="hide-menu">All</span>
+                        	</a>
+                        </li>
+                        <?php
+                        /*
+						Todo: Module Creator
+                        <li class="sidebar-item">
+                        	<a href="<?= $this->getUrl('/system/module/create') ?>" class="sidebar-link">
+                        		<i class="mdi mdi-chart-bubble"></i><span class="hide-menu">Create</span>
+                        	</a>
+                        </li>
+                        */
+                        ?>
+                    </ul>
+                </li>
+			</ul>
+		</nav>
+		<!-- End Sidebar navigation -->
+	</div>
+	<!-- End Sidebar scroll-->
+</aside>
